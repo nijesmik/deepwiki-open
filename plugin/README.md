@@ -9,11 +9,11 @@
 ## Install
 
 ```
-/plugin marketplace add nijesmik/deepwiki-open
+/plugin marketplace add nijesmik/plugins
 /plugin install deepwiki@nijesmik
 ```
 
-Only the `plugin/` directory is installed — the rest of the repository (the original web app) does not come with it.
+The plugin is distributed through the [nijesmik/plugins](https://github.com/nijesmik/plugins) marketplace. Only this `plugin/` directory is installed — the rest of the repository (the original web app) does not come with it.
 
 ## Usage
 

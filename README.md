@@ -7,11 +7,11 @@ This fork keeps DeepWiki's prompts and drops its infrastructure: the Next.js fro
 ## Install
 
 ```
-/plugin marketplace add nijesmik/deepwiki-open
+/plugin marketplace add nijesmik/plugins
 /plugin install deepwiki@nijesmik
 ```
 
-Only the [`plugin/`](plugin/) directory is installed.
+This plugin is distributed through the [nijesmik/plugins](https://github.com/nijesmik/plugins) marketplace, and only the [`plugin/`](plugin/) directory of this repository is installed.
 
 ## Usage
 
@@ -25,8 +25,7 @@ Run inside the repository you want to document (clone it first if it's remote):
 
 ## Repository layout
 
-- [`plugin/`](plugin/) — the Claude Code plugin (the only part that gets installed)
-- [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) — marketplace manifest pointing at `plugin/`
+- [`plugin/`](plugin/) — the Claude Code plugin (the only part that gets installed; the marketplace manifest lives in [nijesmik/plugins](https://github.com/nijesmik/plugins))
 - `src/`, `api/` — the original DeepWiki web application, kept unmodified as the provenance for the plugin's verbatim prompt templates; for running it as a web app, use the [original project](https://github.com/AsyncFuncAI/deepwiki-open)
 
 ## Credits & License
