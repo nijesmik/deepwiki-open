@@ -1,42 +1,34 @@
-# DeepWiki-Open (Grok-Wiki)
+# DeepWiki — Claude Code Plugin
 
-<img width="1536" height="1024" alt="grok-wiki" src="https://github.com/user-attachments/assets/1f569784-d1c8-479d-9a99-d3ef4ad3ec84" />
+A fork of [AsyncFuncAI/deepwiki-open](https://github.com/AsyncFuncAI/deepwiki-open) repackaged as a **Claude Code plugin**. DeepWiki automatically creates wikis for a code repository — analyzing the code structure, generating comprehensive documentation with Mermaid diagrams and source citations, and organizing it into navigable pages.
 
-**DeepWiki** is my own implementation attempt of DeepWiki, automatically creates beautiful, interactive wikis for any GitHub, GitLab, or BitBucket repository! Just enter a repo name, and DeepWiki will:
+This fork keeps DeepWiki's prompts and drops its infrastructure: the Next.js frontend, FastAPI backend, and RAG layer (embeddings, FAISS retrieval, multi-provider LLM clients) are replaced by Claude Code itself, which explores the repository directly with its own tools. See [`plugin/README.md`](plugin/README.md) for the full design, prompt provenance, and what was intentionally changed.
 
-1. Analyze the code structure
-2. Generate comprehensive documentation
-3. Create visual diagrams to explain how everything works
-4. Organize it all into an easy-to-navigate wiki
+## Install
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/sheing)
-[![Tip in Crypto](https://tip.md/badge.svg)](https://tip.md/sng-asyncfunc)
-[![Twitter/X](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/sashimikun_void)
-[![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/invite/VQMBGR8u5v)
+```
+/plugin marketplace add nijesmik/deepwiki-open
+/plugin install deepwiki@nijesmik
+```
 
-[English](./README.md) | [简体中文](./README.zh.md) | [繁體中文](./README.zh-tw.md) | [日本語](./README.ja.md) | [Español](./README.es.md) | [한국어](./README.kr.md) | [Tiếng Việt](./README.vi.md) | [Português Brasileiro](./README.pt-br.md) | [Français](./README.fr.md) | [Русский](./README.ru.md)
+Only the [`plugin/`](plugin/) directory is installed.
 
-## Deepwiki-Open 2.0 (Grok Wiki is now live)
+## Usage
 
-- **Download at** https://grok-wiki.com
+Run inside the repository you want to document (clone it first if it's remote):
 
+| Command | What it does |
+|---|---|
+| `/deepwiki:wiki [comprehensive\|concise] [lang]` | Generates a full wiki into `.deepwiki/` — structure, one Markdown page per topic, and an index. |
+| `/deepwiki:ask <question>` | Answers a question about the codebase: direct, grounded, cited. |
+| `/deepwiki:deep-research <topic>` | Exhaustive investigation of one topic, ending in a comprehensive, code-cited conclusion. |
 
+## Repository layout
 
-https://github.com/user-attachments/assets/48d1e60a-eb91-4c05-a5a8-3624ffb79fb1
+- [`plugin/`](plugin/) — the Claude Code plugin (the only part that gets installed)
+- [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) — marketplace manifest pointing at `plugin/`
+- `src/`, `api/` — the original DeepWiki web application, kept unmodified as the provenance for the plugin's verbatim prompt templates; for running it as a web app, use the [original project](https://github.com/AsyncFuncAI/deepwiki-open)
 
+## Credits & License
 
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-- Open issues for bugs or feature requests
-- Submit pull requests to improve the code
-- Share your feedback and ideas
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## ⭐ Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=AsyncFuncAI/deepwiki-open&type=Date)](https://star-history.com/#AsyncFuncAI/deepwiki-open&Date)
+All prompts and the wiki-generation design come from [DeepWiki-Open](https://github.com/AsyncFuncAI/deepwiki-open) by AsyncFuncAI. Licensed under the MIT License — see [LICENSE](LICENSE).
