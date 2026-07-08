@@ -1,0 +1,13 @@
+{
+  "name": "deepwiki",
+  "owner": {
+    "name": "nijesmik"
+  },
+  "plugins": [
+    {
+      "name": "deepwiki",
+      "source": "./plugin",
+      "description": "DeepWiki as a Claude Code plugin: wiki generation, repository Q&A, and deep research using the original DeepWiki prompts with agentic codebase exploration instead of RAG."
+    }
+  ]
+}
