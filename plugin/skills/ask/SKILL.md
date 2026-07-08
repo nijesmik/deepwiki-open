@@ -1,6 +1,7 @@
 ---
 name: ask
 description: Ask a question about the current repository, DeepWiki-style. Explores the codebase for evidence, then answers directly and concisely with file/line citations, in the language of the question. Usage - /deepwiki:ask <question>
+argument-hint: "<question>"
 ---
 
 # DeepWiki: Ask
@@ -8,6 +9,8 @@ description: Ask a question about the current repository, DeepWiki-style. Explor
 Answer a question about the repository in the current working directory using DeepWiki's original Ask behavior. The system prompt is preserved verbatim in `${CLAUDE_PLUGIN_ROOT}/templates/ask.md` — do not paraphrase or alter it.
 
 The question is: `$ARGUMENTS`
+
+If no question was provided, ask the user what they want to know about the repository and stop.
 
 ## Steps
 

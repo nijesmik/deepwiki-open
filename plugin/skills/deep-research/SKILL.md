@@ -2,6 +2,7 @@
 name: deep-research
 description: Run DeepWiki-style Deep Research on a specific topic in the current repository - one exhaustive codebase investigation followed by a comprehensive, code-cited conclusion. Usage - /deepwiki:deep-research <topic or question>
 disable-model-invocation: true
+argument-hint: "<topic or question>"
 ---
 
 # DeepWiki: Deep Research
@@ -9,6 +10,8 @@ disable-model-invocation: true
 Investigate a specific topic in the repository in the current working directory, DeepWiki Deep Research style. The original DeepWiki ran this as five prompted chat iterations because each stateless API call could only see RAG-retrieved snippets; in Claude Code you explore the repository directly, so this skill runs a single exhaustive investigation followed by one synthesis. The synthesis prompt in `${CLAUDE_PLUGIN_ROOT}/templates/deep-research.md` is adapted from the original final-iteration prompt (multi-turn bookkeeping removed, guidelines otherwise unchanged) — do not paraphrase or alter it further.
 
 The research topic is: `$ARGUMENTS`
+
+If no topic was provided, ask the user what they want researched and stop.
 
 ## Phase 1 — Exhaustive investigation
 

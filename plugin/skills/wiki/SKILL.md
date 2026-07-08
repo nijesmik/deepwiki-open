@@ -2,6 +2,7 @@
 name: wiki
 description: Generate a complete DeepWiki-style wiki for the current repository. Determines a wiki structure (sections/pages as XML), then writes each page with Mermaid diagrams and source citations via parallel page-writer agents. Output goes to .deepwiki/. Usage - /deepwiki:wiki [comprehensive|concise] [language-code]
 disable-model-invocation: true
+argument-hint: "[comprehensive|concise] [language-code]"
 ---
 
 # DeepWiki: Generate Wiki
@@ -35,8 +36,8 @@ Resolve `${language_name}` from the language code using this mapping (identical 
 
 This replaces the original frontend's GitHub API calls:
 
-1. Determine `${owner}` and `${repo}` from `git remote get-url origin` (fall back to the working directory name for `${repo}` and leave `${owner}` as `local` if there is no remote).
-2. Build `${fileTree}` by running `git ls-files` (one path per line). If the tree is extremely large (>10,000 files), you may summarize deeply nested vendored/generated directories, but keep all source directories complete.
+1. Determine `${owner}` and `${repo}` from `git remote get-url origin`, and keep the remote URL as `<repo_url>` for Step 4. If there is no remote, fall back to the working directory name for `${repo}`, `local` for `${owner}`, and the absolute local path for `<repo_url>`.
+2. Build `${fileTree}` by running `git ls-files --cached --others --exclude-standard` (one path per line; this also includes not-yet-committed files). If the directory is not a git repository, build the tree with Glob instead, skipping dependency and build directories (`node_modules`, `dist`, `vendor`, `.venv`, and similar). If the tree is extremely large (>10,000 files), you may summarize deeply nested vendored/generated directories, but keep all source directories complete.
 3. Read the repository's `README.md` (or closest equivalent) as `${readme}`. If none exists, use an empty string.
 
 ## Step 2 — Determine the wiki structure
@@ -54,11 +55,12 @@ For every `<page>` in the structure XML:
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/templates/wiki-page.md` and substitute:
    - `${page.title}` — the page's `<title>` (all occurrences)
-   - `${file_list}` — one line per `<file_path>`, formatted as `- [path/to/file](path/to/file)` (relative repository paths)
+   - `${file_list}` — one line per `<file_path>`, formatted as `- [path/to/file](../../path/to/file)` (pages live in `.deepwiki/pages/`, so the `../../` prefix makes links resolve from there)
    - `${language_name}` — as resolved above
 2. Launch a `deepwiki:page-writer` agent whose task message is:
    - the filled page prompt, followed by
-   - `Output file: .deepwiki/pages/<page-id>.md` (using the page's XML `id`)
+   - `Other wiki pages:` — one `<page-id>: <title>` line per other page in the structure, so the writer can resolve cross-page links, followed by
+   - `Output file:` — the absolute path to `.deepwiki/pages/<page-id>.md` (using the page's XML `id`)
 3. Run page agents in parallel (batches of 3–5, mirroring the original queue behavior). Wait for all pages to finish; re-run any page that fails once.
 
 ## Step 4 — Build the index
@@ -76,7 +78,7 @@ Generated on: <YYYY-MM-DD HH:MM:SS>
 ...
 ```
 
-- List pages grouped under their section titles when the comprehensive structure has `<sections>`.
+- List pages grouped under their section titles when the comprehensive structure has `<sections>`; render nested `<subsections>` as indented sub-lists.
 - After the table of contents, add a short "Related Pages" mapping if pages declare `<related_pages>` (`Related topics: [Title](pages/id.md), ...`).
 
 ## Step 5 — Report

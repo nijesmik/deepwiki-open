@@ -4,6 +4,7 @@
 
 - **Prompts are verbatim.** DeepWiki's prompts are preserved character-for-character in [`templates/`](templates/), with one documented exception (deep-research, see the provenance table). Only the runtime substitutions the original code performed (repo name, page title, language, file lists) remain as placeholders.
 - **RAG → agentic exploration.** Where the backend injected embedding-retrieved file chunks into `<START_OF_CONTEXT>`, Claude Code agents now Read/Grep/Glob the repository directly.
+- **Web renderer → plain files.** The original web app's renderer resolved source links, `Sources:` citations, and cross-page links; since output is now Markdown files in `.deepwiki/`, the page-writer agent fills those links with working relative paths (`../../file#L10-L20`, sibling `<page-id>.md`) while keeping the visible citation text the prompts specify.
 
 ## Install
 
