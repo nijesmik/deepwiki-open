@@ -1,6 +1,7 @@
 ---
 name: deep-research
 description: Run DeepWiki's multi-iteration Deep Research process on a specific topic in the current repository - research plan, iterative investigation updates, and a final conclusion, each grounded in fresh codebase exploration. Usage - /deepwiki:deep-research <topic or question>
+disable-model-invocation: true
 ---
 
 # DeepWiki: Deep Research

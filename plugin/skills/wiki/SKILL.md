@@ -1,6 +1,7 @@
 ---
 name: wiki
 description: Generate a complete DeepWiki-style wiki for the current repository. Determines a wiki structure (sections/pages as XML), then writes each page with Mermaid diagrams and source citations via parallel page-writer agents. Output goes to .deepwiki/. Usage - /deepwiki:wiki [comprehensive|concise] [language-code]
+disable-model-invocation: true
 ---
 
 # DeepWiki: Generate Wiki

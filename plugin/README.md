@@ -9,7 +9,7 @@
 
 ```
 /plugin marketplace add nijesmik/deepwiki-open
-/plugin install deepwiki@deepwiki
+/plugin install deepwiki@nijesmik
 ```
 
 Only the `plugin/` directory is installed — the rest of the repository (the original web app) does not come with it.
