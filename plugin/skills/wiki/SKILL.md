@@ -81,6 +81,18 @@ Generated on: <YYYY-MM-DD HH:MM:SS>
 - List pages grouped under their section titles when the comprehensive structure has `<sections>`; render nested `<subsections>` as indented sub-lists.
 - After the table of contents, add a short "Related Pages" mapping if pages declare `<related_pages>` (`Related topics: [Title](pages/id.md), ...`).
 
+Also write `.deepwiki/metadata.json`, which `/deepwiki:update` later uses to pick a diff baseline and recover these settings:
+
+```json
+{
+  "view": "<comprehensive|concise>",
+  "language": "<language code>",
+  "commit": "<git rev-parse HEAD, or null if not a git repository>",
+  "dirty": <true if git status --porcelain lists changes outside .deepwiki/>,
+  "generated_at": "<same timestamp as the index>"
+}
+```
+
 ## Step 5 — Report
 
 Tell the user: the wiki title and description, the list of generated pages with paths, and any pages that failed. Do not print full page contents in the conversation.

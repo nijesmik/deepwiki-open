@@ -39,7 +39,7 @@ The only tolerated diff is a trailing POSIX newline at end of file.
 
 ## Layout
 
-- `plugin/skills/{wiki,ask,deep-research}/SKILL.md` — orchestration (ours to change)
+- `plugin/skills/{wiki,update,ask,deep-research}/SKILL.md` — orchestration (ours to change; `update` has no upstream counterpart — the original only offered cache-delete + full regeneration)
 - `plugin/agents/page-writer.md` — per-page writer wrapper (ours to change)
 - `plugin/templates/` — verbatim prompts (frozen, see above)
 - `plugin/README.md` — design, install, provenance table; update it whenever wrappers or templates change
