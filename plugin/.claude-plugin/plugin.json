@@ -1,7 +1,7 @@
 {
   "name": "deepwiki",
   "displayName": "DeepWiki",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "DeepWiki as a Claude Code plugin: generate a full wiki with Mermaid diagrams and source citations, update it incrementally as the code changes, ask questions, and run deep research on the current repository. Uses the original DeepWiki prompts, with the RAG layer replaced by Claude Code's agentic codebase exploration.",
   "author": {
     "name": "nijesmik"
