@@ -88,7 +88,7 @@ Also write `.deepwiki/metadata.json`, which `/deepwiki:update` later uses to pic
   "view": "<comprehensive|concise>",
   "language": "<language code>",
   "commit": "<git rev-parse HEAD, or null if not a git repository>",
-  "dirty": <true if git status --porcelain lists changes outside .deepwiki/>,
+  "dirty": <true if git status --porcelain lists changes outside .deepwiki/; false if not a git repository>,
   "generated_at": "<same timestamp as the index>"
 }
 ```

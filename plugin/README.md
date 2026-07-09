@@ -22,7 +22,7 @@ Run inside the repository you want to document (clone it first if it's remote):
 | Command | What it does |
 |---|---|
 | `/deepwiki:wiki [comprehensive\|concise] [lang]` | Generates a full wiki into `.deepwiki/` — structure XML, one Markdown page per topic (Mermaid diagrams, `Sources:` citations), and an index. Pages are written by parallel `page-writer` agents. |
-| `/deepwiki:update [ref] [restructure]` | Updates an existing `.deepwiki/` wiki: diffs the repository against the wiki's generation baseline and regenerates only the pages whose source files changed. `restructure` re-runs structure determination (recommended after large changes). |
+| `/deepwiki:update [base-ref] [restructure]` | Updates an existing `.deepwiki/` wiki: diffs the repository against the wiki's generation baseline and regenerates only the pages whose source files changed. `restructure` re-runs structure determination (recommended after large changes). |
 | `/deepwiki:ask <question>` | Answers a question about the codebase in DeepWiki's Ask style: direct, grounded, cited. |
 | `/deepwiki:deep-research <topic>` | Deep Research on one topic: an exhaustive codebase investigation followed by a comprehensive, code-cited `## Final Conclusion`. |
 
@@ -32,7 +32,7 @@ Supported language codes (same as the original): `en`, `ja`, `zh`, `zh-tw`, `es`
 
 The original web app's only update path was the **Refresh Wiki** button: `DELETE /api/wiki_cache` followed by full regeneration. Because this plugin's output is plain files instead of a cache blob, an incremental path becomes possible, and `/deepwiki:update` provides it entirely in the wrapper layer — it fills the same verbatim templates; no prompt text was added or changed:
 
-- `/deepwiki:wiki` records `.deepwiki/metadata.json` (view, language, the commit it generated from). `/deepwiki:update` diffs the repository against that baseline (fallback: the last commit touching `.deepwiki/`, or an explicit ref argument), maps changed files to pages via each page's `<relevant_files>` in `structure.xml`, and regenerates only the stale pages with the same page-writer agents.
+- `/deepwiki:wiki` records `.deepwiki/metadata.json` (view, language, the commit it generated from, and a dirty-worktree flag). `/deepwiki:update` diffs the repository against that baseline (an explicit ref argument overrides it; the fallback is the last commit touching `.deepwiki/`), maps changed files to pages via each page's `<relevant_files>` in `structure.xml`, and regenerates only the stale pages with the same page-writer agents.
 - Changed files no page covers are assigned to the closest page; when changes outgrow the existing structure (new subsystems, most pages stale), the skill recommends `restructure`, which re-runs structure determination and regenerates around it while carrying over untouched pages.
 - Committing `.deepwiki/` to git is recommended: updates then show up as reviewable diffs, and the wiki's own history doubles as a fallback baseline.
 
