@@ -1,11 +1,11 @@
 ---
-name: wiki
-description: Generate a complete DeepWiki-style wiki for the current repository. Determines a wiki structure (sections/pages as XML), then writes each page with Mermaid diagrams and source citations via parallel page-writer agents. Output goes to .deepwiki/. Usage - /deepwiki:wiki [comprehensive|concise] [language-code]
+name: create-wiki
+description: Generate a complete DeepWiki-style wiki for the current repository. Determines a wiki structure (sections/pages as XML), then writes each page with Mermaid diagrams and source citations via parallel page-writer agents. Output goes to .deepwiki/. Usage - /deepwiki:create-wiki [comprehensive|concise] [language-code]
 disable-model-invocation: true
 argument-hint: "[comprehensive|concise] [language-code]"
 ---
 
-# DeepWiki: Generate Wiki
+# DeepWiki: Create Wiki
 
 Generate a DeepWiki-style wiki for the repository in the current working directory. This skill reproduces the original DeepWiki pipeline (structure determination → per-page generation), with one difference: instead of a RAG retrieval backend supplying file contents, you and the page-writer agents explore the repository directly with Read/Grep/Glob.
 
@@ -81,7 +81,7 @@ Generated on: <YYYY-MM-DD HH:MM:SS>
 - List pages grouped under their section titles when the comprehensive structure has `<sections>`; render nested `<subsections>` as indented sub-lists.
 - After the table of contents, add a short "Related Pages" mapping if pages declare `<related_pages>` (`Related topics: [Title](pages/id.md), ...`).
 
-Also write `.deepwiki/metadata.json`, which `/deepwiki:update` later uses to pick a diff baseline and recover these settings:
+Also write `.deepwiki/metadata.json`, which `/deepwiki:update-wiki` later uses to pick a diff baseline and recover these settings:
 
 ```json
 {

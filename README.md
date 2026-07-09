@@ -19,7 +19,8 @@ Run inside the repository you want to document (clone it first if it's remote):
 
 | Command | What it does |
 |---|---|
-| `/deepwiki:wiki [comprehensive\|concise] [lang]` | Generates a full wiki into `.deepwiki/` — structure, one Markdown page per topic, and an index. |
+| `/deepwiki:create-wiki [comprehensive\|concise] [lang]` | Generates a full wiki into `.deepwiki/` — structure, one Markdown page per topic, and an index. |
+| `/deepwiki:update-wiki [base-ref] [restructure]` | Updates an existing wiki: regenerates only the pages whose source files changed since generation. |
 | `/deepwiki:ask <question>` | Answers a question about the codebase: direct, grounded, cited. |
 | `/deepwiki:deep-research <topic>` | Exhaustive investigation of one topic, ending in a comprehensive, code-cited conclusion. |
 

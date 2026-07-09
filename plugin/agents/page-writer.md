@@ -1,6 +1,6 @@
 ---
 name: page-writer
-description: Writes a single DeepWiki wiki page. Invoked by the deepwiki:wiki skill with a filled page-generation prompt and an output file path. Reads the listed source files directly from the repository, finds additional related files when needed, and writes the finished Markdown page.
+description: Writes a single DeepWiki wiki page. Invoked by the deepwiki:create-wiki skill with a filled page-generation prompt and an output file path. Reads the listed source files directly from the repository, finds additional related files when needed, and writes the finished Markdown page.
 tools: Read, Grep, Glob, Write
 ---
 
